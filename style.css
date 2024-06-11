@@ -1,3 +1,43 @@
+body{
+  background-color: lightblue;
+  }
+
 h1 {
-  color: purple;
+  color: blue;
+  font-size: 70px;
+  text-align: center;
+  padding-bottom: 50;
+}
+
+form {
+  text-align: center;
+  font-size: 30px;
+  background-color: rgb(137, 255, 122);
+}
+
+.strikeThrough {
+  text-decoration: line-through;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 150px auto;
+  column-gap: 5px;
+  row-gap: 5px;
+}
+
+.list {
+  
+  display:grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  margin: 20px 20px 20px 20px;
+}
+
+.tasks {
+  display:flex;
+  
+  padding: 20px 20px 20px 20px;
+  border: 2px solid white;
 }

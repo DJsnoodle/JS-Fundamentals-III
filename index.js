@@ -22,6 +22,7 @@ const populateList = ({task, completion, taskID, removed}) => {
     if (!removed){
       let listElement = document.createElement('li');
       listElement.id = `task${taskID}`;
+      listElement.classList.add("tasks");
       let listContainer = document.querySelector('ol');
       //Adds list item to ordered list
       listContainer.appendChild(listElement);
@@ -54,6 +55,7 @@ to_do.forEach((task) => {
 const button = document.querySelector('#add');
 button.addEventListener('click', onButtonClick);
 const task = document.querySelector('#task');
+const taskInput = document.querySelector('#task'); 
 let textField = ""
 task.addEventListener('input', (eventObject) => {
   textField = eventObject.target.value;
@@ -62,6 +64,7 @@ task.addEventListener('input', (eventObject) => {
 // Adds alert pop up when button is clicked
 function onButtonClick(){
     addToList(textField);
+    taskInput.value = ''; // Reset the input field after adding
 }
 
 // // Remove the list item
@@ -69,27 +72,28 @@ function removeButtonClick(taskID) {
     let itemRemoved = document.getElementById(`task${taskID}`);
     itemRemoved.remove();
 }
-
-function strikeThrough(taskID){
-  let strikeElement = document.createElement('s');
-  strikeElement.id = `strike${taskID}`;
-  listItem = document.getElementById(`task${taskID}`);
-  strikeElement.innerHTML = listItem.innerHTML;
-  console.log(strikeElement + listItem.innerHTML);
-  listItem.innerHTML = strikeElement;
+// Adds functin that gives text 'strikethrough' when checkbox is checked
+function strikeThrough(taskID) {
+  let strikeThrough = document.getElementById(`task${taskID}`);
+  let checked = to_do[taskID].completion;
+  if (checked){
+    to_do[taskID].completion = 0;
+    strikeThrough.classList.remove('strikeThrough');
+    // Removes strikethrough when checkbox is unchecked
+  } else {
+    to_do[taskID].completion = 1;
+    strikeThrough.classList.add('strikeThrough');
+  }
 }
 
-// let listElement = document.createElement('s'); <s></s>
-//       listElement.id = `strike${taskID}`;
-// listitem = document.getElementById()
-// listitem.innertext.strike()
-// function removeButtonClick(){
-//     let itemRemoved = document.getElementById(this.name);
-//     console.log(itemRemoved);
-//     itemRemoved.innerHTML = null;
-//     itemRemoved.remove();
-// }
-
-
-// const contentString = "Hello, world";
-// document.body.innerHTML = contentString.strike();
+function toggleCompletion(taskID) {
+    const checkbox = document.querySelector(`#task${taskID} input[type="checked"]`);
+    const taskSpan = document.querySelector(`#task${taskID} span`);
+  
+    if (checkbox.checked) {
+      taskSpan.classList.add('completed');
+    } else {
+      taskSpan.classList.remove('completed');
+    }
+  }
+  
